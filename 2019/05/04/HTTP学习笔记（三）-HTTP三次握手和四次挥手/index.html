@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>HTTP 学习笔记(三): HTTP 三次握手和四次挥手 | YINGPENGSHA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="HTTP, TCP/IP" />
+  
+  
+  
+  
+  <meta name="keywords" content="HTTP, TCP&#x2F;IP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP 学习笔记(三): HTTP 三次握手和四次挥手">
+<meta property="og:url" content="https://yingpengsha.github.io/2019/05/04/HTTP学习笔记（三）-HTTP三次握手和四次挥手/index.html">
+<meta property="og:site_name" content="YINGPENGSHA">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/268093/1556968673798-298a4da5-10f7-4bc4-b721-19249a86e05f.png">
+<meta property="og:updated_time" content="2019-05-04T11:18:37.517Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTP 学习笔记(三): HTTP 三次握手和四次挥手">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2019/png/268093/1556968673798-298a4da5-10f7-4bc4-b721-19249a86e05f.png">
+  
+    <link rel="alternate" href="/atom.xml" title="YINGPENGSHA" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="../../../../css/style.css">
+
+  <script src="../../../../js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="YINGPENGSHA" rel="home"> YINGPENGSHA </a>
+            
+          </h1>
+          
+          
+            <div class="site-description">Pease &amp; Love</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../index.html">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../categories">Categories</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-HTTP学习笔记（三）-HTTP三次握手和四次挥手" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img fancybox" href="https://cdn.nlark.com/yuque/0/2019/png/268093/1556968673798-298a4da5-10f7-4bc4-b721-19249a86e05f.png" rel="gallery_cjv9etpig0002n8y4qd1f17g4">
+        <img src="https://cdn.nlark.com/yuque/0/2019/png/268093/1556968673798-298a4da5-10f7-4bc4-b721-19249a86e05f.png" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      HTTP 学习笔记(三): HTTP 三次握手和四次挥手
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="" class="article-date">
+	  <time datetime="2019-05-04T11:14:06.000Z" itemprop="datePublished">May 4, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../../../categories/学习笔记/">学习笔记</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<a id="more"></a>
+<p><a name="3NmlG"></a></p>
+<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>毫无疑问，HTTP 三次握手和四次挥手在实际应用场景和面试上都属于重点。虽然此前进行过学习，但由于在开发过程中遇到的次数太少，便没有记住多少。为了加强记忆，也为了梳理自身混乱的知识体系，特地记录下来，以便反复学习记忆。</p>
+<p><a name="avZ6A"></a></p>
+<h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><p><img src="https://cdn.nlark.com/yuque/0/2019/png/268093/1556961536368-aac69f04-d438-4697-ae96-a83139af3431.png#align=left&amp;display=inline&amp;height=352&amp;name=%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png&amp;originHeight=352&amp;originWidth=690&amp;size=10083&amp;status=done&amp;width=690" alt="三次握手.png"><br></p>
+<ul>
+<li><strong>seq</strong> : sequence</li>
+<li><strong>SYN </strong>: synchronize</li>
+<li><strong>ACK</strong> : acknowledgment</li>
+<li><strong>SYN_SENT</strong> : syn package has been sent</li>
+<li><strong>SYN_RCVD</strong> : syn package has been received</li>
+</ul>
+<p><a name="sQt5D"></a></p>
+<h4 id="第一次握手"><a href="#第一次握手" class="headerlink" title="第一次握手"></a>第一次握手</h4><p>Client 发送一个 <strong>SYN(seq = x) 包</strong>给 Server，然后等待 server 的 ACK 回复，进入<code>SYN-SENT</code>状态。</p>
+<blockquote>
+<p>张三首先向李四招手 (<strong>SYN</strong>)</p>
+</blockquote>
+<p><a name="7ZKFE"></a></p>
+<h4 id="第二次握手"><a href="#第二次握手" class="headerlink" title="第二次握手"></a>第二次握手</h4><p>Server 接收到<strong> SYN(seq = x) 包</strong>后就返回一个 <strong>ACK(x + 1) 包</strong>以及一个自己的 <strong>SYN(seq = y) 包</strong>，然后等待 Client 的 ACK 回复，Server 进入<code>SYN-RECIVED</code>状态。</p>
+<blockquote>
+<p>李四看到张三向自己招手后，向对方点了点头挤出了一个微笑 (<strong>ACK</strong>)。<br>但是李四还有点狐疑，向四周看了一看，有没有可能张三是在看别人呢，他也需要确认一下。所以李四也向张三招了招手 (<strong>SYN</strong>)。</p>
+</blockquote>
+<p><a name="MUsKa"></a></p>
+<h4 id="第三次握手"><a href="#第三次握手" class="headerlink" title="第三次握手"></a>第三次握手</h4><p>Client 接收到 Server 发回的 <strong>ACK(x + 1) 包</strong>后，进入<code>ESTABLISHED</code>状态。然后根据 Server 发来的 <strong>SYN(seq = y) 包</strong>，返回给等待中的 Server 一个 <strong>ACK(x + 1) 包</strong>。等待中的 Server 收到 ACK 回复，也把自己的状态设置为<code>ESTABLISHED</code>。到此 TCP 三次握手完成，Client 与 Server 可以正常进行通信了。</p>
+<blockquote>
+<p>张三看到李四微笑后确认了李四成功辨认出了自己(进入 <strong>ESTALISHED </strong>状态)。<br>张三看到李四向自己招手后知道对方是在寻求自己的确认，于是也点了点头挤出了微笑 (<strong>ACK</strong>)，李四看到对方的微笑后确认了张三就是在向自己打招呼(进入 <strong>ESTALISHED </strong>状态)。</p>
+</blockquote>
+<p><br><br><a name="M4Gf8"></a></p>
+<h4 id="为什么是三次"><a href="#为什么是三次" class="headerlink" title="为什么是三次"></a>为什么是三次</h4><blockquote>
+<p>这个问题在谢希仁版《计算机网络》里说了。<br>三次是保证双方互相明确对方能收能发的最低值。<br>理论上讲不论握手多少次都不能确认一条信道是“可靠”的，但通过3次握手可以至少确认它是“可用”的，再往上加握手次数不过是提高“它是可用的”这个结论的可信程度。</p>
+</blockquote>
+<p><a name="xFct7"></a></p>
+<h3 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h3><p><img src="https://cdn.nlark.com/yuque/0/2019/png/268093/1556967361700-fa626ba0-d6a8-4d98-be73-4ff64a6e0311.png#align=left&amp;display=inline&amp;height=448&amp;name=%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.png&amp;originHeight=448&amp;originWidth=705&amp;size=12457&amp;status=done&amp;width=705" alt="四次挥手.png"><br></p>
+<p><a name="RFOZM"></a></p>
+<h4 id="第一次挥手"><a href="#第一次挥手" class="headerlink" title="第一次挥手"></a>第一次挥手</h4><p>Initiator 发送一个 <strong>FIN(seq = x + 2) + ACK(y + 1) 包</strong>，此时 Initiator 进入<code>FIN-WAIT-1</code>状态，这表明Initiator 已经没有数据要发送了。</p>
+<blockquote>
+<p>张三挥手 (<strong>FIN</strong>)</p>
+</blockquote>
+<p><a name="Bhldi"></a></p>
+<h4 id="第二次挥手"><a href="#第二次挥手" class="headerlink" title="第二次挥手"></a>第二次挥手</h4><p>Recipient 收到了 Initiator 发来的 <strong>FIN(seq = x + 2) + ACK(y + 1) 包</strong>后，向client发回一个<strong>ACK(x + 3)包</strong>，此时Recipient 进入<code>CLOSE-WAIT</code>状态，Initiator 进入<code>FIN-WAIT-2</code>状态。</p>
+<blockquote>
+<p>李四伤感地微笑 (<strong>ACK</strong>)</p>
+</blockquote>
+<p><br><br><a name="d5SPs"></a></p>
+<h4 id="第三次挥手"><a href="#第三次挥手" class="headerlink" title="第三次挥手"></a>第三次挥手</h4><p>Recipient 向 Initiator 发送 <strong>FIN(seq = y + 1) 包</strong>，请求关闭连接，同时 Recipient 进入<code>LAST-ACK</code>状态。</p>
+<blockquote>
+<p>李四挥手 (<strong>FIN</strong>)</p>
+</blockquote>
+<p><a name="iZ0pF"></a></p>
+<h4 id="第四次挥手"><a href="#第四次挥手" class="headerlink" title="第四次挥手"></a>第四次挥手</h4><p>Initiator 收到 Recipient 发送的 <strong>FIN(seq = y + 1) 包</strong>，进入<code>TIME-WAIT</code>状态。向 Recipient 发送 <strong>ACK(y + 2)</strong> <strong>包</strong>，Recipient 收到client的 <strong>ACK(y + 2)</strong> <strong>包</strong>以后，进入<code>CLOSE</code>状态；Initiator 等待一段时间还没有得到回复后判断Recipient 已正式关闭，进入<code>CLOSE</code>状态。</p>
+<blockquote>
+<p>张三伤感地微笑 (<strong>ACK</strong>)</p>
+</blockquote>
+<p><a name="w5Cze"></a></p>
+<h4 id="为什么是四次"><a href="#为什么是四次" class="headerlink" title="为什么是四次"></a>为什么是四次</h4><blockquote>
+<p>TCP断开链接的过程和建立链接的过程比较类似，只不过中间的两部并不总是会合成一步走，所以它分成了4个动作，张三挥手(fin)——李四伤感地微笑(ack)——李四挥手(fin)——张三伤感地微笑(ack)。<br><br>之所以中间的两个动作没有合并，是因为tcp存在「半关闭」状态，也就是单向关闭。张三已经挥了手，可是人还没有走，只是不再说话，但是耳朵还是可以继续听，李四呢继续喊话。等待李四累了，也不再说话了，朝张三挥了挥手，张三伤感地微笑了一下，才彻底结束了。</p>
+</blockquote>
+<p><a name="V2vPf"></a></p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li><a href="https://juejin.im/post/5a7835a46fb9a063606eb801#heading-7" target="_blank" rel="noopener">图解TCP三次握手与四次分手</a></li>
+<li><a href="https://juejin.im/post/5b29d2c4e51d4558b80b1d8c" target="_blank" rel="noopener">跟着动画来学习TCP三次握手和四次挥手</a></li>
+<li><a href="http://jiar.github.io/2017/08/24/TCP%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B%E7%AE%80%E4%BB%8B/" target="_blank" rel="noopener">TCP四次挥手简介</a></li>
+<li><a href="https://www.zhihu.com/question/24853633" target="_blank" rel="noopener">TCP 为什么是三次握手，而不是两次或四次？</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../../../categories/学习笔记/">学习笔记</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/HTTP/">HTTP</a></li></ul>
+
+      
+        
+	<div id="comment">
+	
+	<!-- 多说评论框 start -->
+	 <div class="ds-thread" data-thread-key="/2019/05/04/HTTP学习笔记（三）-HTTP三次握手和四次挥手/" data-title="HTTP 学习笔记(三): HTTP 三次握手和四次挥手" data-url="https://yingpengsha.github.io/2019/05/04/HTTP学习笔记（三）-HTTP三次握手和四次挥手/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"iTimeTraveler"};
+	  (function() {
+	    var ds = document.createElement('script');
+	    ds.type = 'text/javascript';ds.async = true;
+	    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	    ds.charset = 'UTF-8';
+	    (document.getElementsByTagName('head')[0] 
+	     || document.getElementsByTagName('body')[0]).appendChild(ds);
+	  })();
+	  </script>
+	<!-- 多说公共JS代码 end -->
+	
+	</div>
+	<link rel="stylesheet" href="../../../../css/comment.css">
+
+
+      
+
+      
+        
+        <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zOTQxMC8xNTkzNw==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+        
+      
+
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../HTTP学习笔记（二）-HTTP协议的发展历史/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">HTTP 学习笔记(二): HTTP协议的发展历史</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三次握手"><span class="nav-number">2.</span> <span class="nav-text">三次握手</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一次握手"><span class="nav-number">2.1.</span> <span class="nav-text">第一次握手</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二次握手"><span class="nav-number">2.2.</span> <span class="nav-text">第二次握手</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第三次握手"><span class="nav-number">2.3.</span> <span class="nav-text">第三次握手</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么是三次"><span class="nav-number">2.4.</span> <span class="nav-text">为什么是三次</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四次挥手"><span class="nav-number">3.</span> <span class="nav-text">四次挥手</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一次挥手"><span class="nav-number">3.1.</span> <span class="nav-text">第一次挥手</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二次挥手"><span class="nav-number">3.2.</span> <span class="nav-text">第二次挥手</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第三次挥手"><span class="nav-number">3.3.</span> <span class="nav-text">第三次挥手</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第四次挥手"><span class="nav-number">3.4.</span> <span class="nav-text">第四次挥手</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么是四次"><span class="nav-number">3.5.</span> <span class="nav-text">为什么是四次</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考链接"><span class="nav-number">4.</span> <span class="nav-text">参考链接</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="../../../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../../../archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="../../../../categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="../../../../tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="../../../../about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 YINGPENGSHA All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人次</span>
+            <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+            
+          
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="../../../../fancybox/jquery.fancybox.css">
+  <script src="../../../../fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="../../../../js/script.js"></script>
+<script src="../../../../js/bootstrap.js"></script>
+<script src="../../../../js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
