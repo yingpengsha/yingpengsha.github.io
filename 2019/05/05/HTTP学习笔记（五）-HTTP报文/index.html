@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>HTTP 学习笔记(一): TCP/IP 五层模型 | YINGPENGSHA</title>
+  <title>HTTP 学习笔记(五): HTTP 报文 | YINGPENGSHA</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="HTTP, TCP/IP" />
@@ -13,15 +13,15 @@
   
   <meta name="keywords" content="HTTP, TCP&#x2F;IP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HTTP 学习笔记(一): TCP&#x2F;IP 五层模型">
-<meta property="og:url" content="https://yingpengsha.github.io/2019/05/03/HTTP学习笔记（一）-经典网络五层模型/index.html">
+<meta property="og:title" content="HTTP 学习笔记(五): HTTP 报文">
+<meta property="og:url" content="https://yingpengsha.github.io/2019/05/05/HTTP学习笔记（五）-HTTP报文/index.html">
 <meta property="og:site_name" content="YINGPENGSHA">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/268093/1556885511738-d1c1d695-60de-4742-b6b3-eb70c2624823.png">
-<meta property="og:updated_time" content="2019-05-04T06:49:48.698Z">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/268093/1557056324466-f13807af-984d-4c08-b451-6c6dea1c05e7.png">
+<meta property="og:updated_time" content="2019-05-05T11:39:02.267Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HTTP 学习笔记(一): TCP&#x2F;IP 五层模型">
-<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2019/png/268093/1556885511738-d1c1d695-60de-4742-b6b3-eb70c2624823.png">
+<meta name="twitter:title" content="HTTP 学习笔记(五): HTTP 报文">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2019/png/268093/1557056324466-f13807af-984d-4c08-b451-6c6dea1c05e7.png">
   
     <link rel="alternate" href="/atom.xml" title="YINGPENGSHA" type="application/atom+xml">
   
@@ -106,14 +106,14 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-HTTP学习笔记（一）-经典网络五层模型" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-HTTP学习笔记（五）-HTTP报文" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="https://cdn.nlark.com/yuque/0/2019/png/268093/1556885511738-d1c1d695-60de-4742-b6b3-eb70c2624823.png" rel="gallery_cjvaulje8000a74y4hxe3zw9s">
-        <img src="https://cdn.nlark.com/yuque/0/2019/png/268093/1556885511738-d1c1d695-60de-4742-b6b3-eb70c2624823.png" itemprop="image">
+      <a class="article-gallery-img fancybox" href="https://cdn.nlark.com/yuque/0/2019/png/268093/1557056324466-f13807af-984d-4c08-b451-6c6dea1c05e7.png" rel="gallery_cjvauljdj000474y4nbn8axhf">
+        <img src="https://cdn.nlark.com/yuque/0/2019/png/268093/1557056324466-f13807af-984d-4c08-b451-6c6dea1c05e7.png" itemprop="image">
       </a>
     
   </div>
@@ -124,7 +124,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      HTTP 学习笔记(一): TCP/IP 五层模型
+      HTTP 学习笔记(五): HTTP 报文
     </h1>
   
 
@@ -133,7 +133,7 @@
     <div class="article-meta">
       
 	<a href="" class="article-date">
-	  <time datetime="2019-05-03T12:13:48.000Z" itemprop="datePublished">May 3, 2019</time>
+	  <time datetime="2019-05-05T11:23:09.000Z" itemprop="datePublished">May 5, 2019</time>
 	</a>
 
       
@@ -150,24 +150,86 @@
       
         <hr>
 <a id="more"></a>
-<p><a name="1e63bf70"></a></p>
-<h3 id="TCP-IP-五层模型"><a href="#TCP-IP-五层模型" class="headerlink" title="TCP/IP 五层模型"></a>TCP/IP 五层模型</h3><p>应用层( HTTP/FTP )、传输层( TCP/UDP )、网络层、数据链路层、物理层。</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2019/png/268093/1556883183933-5cfea18e-f062-4aee-bf0c-161a7ba8424c.png#align=left&amp;display=inline&amp;height=652&amp;name=TCPIP.png&amp;originHeight=877&amp;originWidth=265&amp;size=14893&amp;status=done&amp;width=197" alt="TCP/IP 五层模型"></p>
-<p><a name="dW7KP"></a></p>
-<h3 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h3><p><a name="LtwS4"></a></p>
-<h4 id="应用层-1"><a href="#应用层-1" class="headerlink" title="应用层"></a>应用层</h4><p><strong>针对特定应用的协议</strong>（如，电子邮件协议 E-mail 、远程登录协议 SSH 、文件传输协议 FTP 、网络请求协议 HTTP ）</p>
-<p><a name="awtTL"></a></p>
-<h4 id="表示层"><a href="#表示层" class="headerlink" title="表示层"></a>表示层</h4><p><strong>设备固有的数据格式</strong>与<strong>网络标准数据格式之间的转换</strong>（接受不同的信息，如文字流、图像、声音等）</p>
-<p><a name="tUSLt"></a></p>
-<h4 id="会话层"><a href="#会话层" class="headerlink" title="会话层"></a>会话层</h4><p><strong>负责建立和断开通信连接，以及数据的分割等数据传输相关的管理。</strong>（何时建立连接？何时断开？以及保持多久的链接）</p>
-<p><a name="4umfE"></a></p>
-<h3 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h3><p>有了 MAC 地址和 IP 地址，我们还需要一个参数，表示这个数据包到底供哪个程序（进程）使用（比如实在聊天还是在浏览网页），这个参数就叫”端口”;<strong>“传输层”的功能，就是建立”端口到端口”的通信。相比之下，”网络层”的功能是建立”主机到主机”的通信。只要确定主机和端口，我们就能实现程序之间的交流。</strong></p>
-<p><a name="QsRQq"></a></p>
-<h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><p>引进一套新的地址，使得我们能够区分不同的计算机是否属于同一个子网络。<strong>这套地址就叫做”网络地址”（IP地址）</strong>。</p>
-<p><a name="M65XA"></a></p>
-<h3 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h3><p>单纯的0和1没有任何意义，必须规定解读方式：多少个电信号算一组？每个信号为位有何意义？<strong>这就是”链路层”</strong><br><strong>的功能，它在”实体层”的上方，确定了0和1的分组方式。</strong></p>
-<p><a name="UAJeo"></a></p>
-<h3 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h3><p><strong>把电脑连接起来的物理手段</strong>，可以用光缆、电缆、双绞线、无线电波等方式，它主要规定了网络的一些电气特征，<strong>作用是负责传输0和1的电信号。</strong></p>
+<p><a name="H3HyF"></a></p>
+<h3 id="HTTP-报文"><a href="#HTTP-报文" class="headerlink" title="HTTP 报文"></a>HTTP 报文</h3><p>用于 HTTP 协议交互的信息被称为 HTTP 报文。请求端（客户端）的 HTTP 报文叫做<strong>请求报文</strong>，响应端（服务器端）的叫做<strong>响应报文</strong>。HTTP 报文本身是由多行（用 CR + LF 作换行符）数据构成的字符串文本。<br>HTTP 报文大致可分为<strong>报文首部</strong>和<strong>报文主体</strong>两块。两者由最初出现的空行（CR + LF）来划分。通常，并不一定要有报文主体。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">报文首部</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">空行（CR + LF）</td>
+</tr>
+<tr>
+<td style="text-align:center"><br><br>报文主体</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>报文首部</strong>：服务器端或客户端需要处理的请求或相应的内容及属性</li>
+<li><strong>CR + LF</strong>：CR（Carriage Return，回车符：16 进制 0x0d）和 LF（Line Feed，换行符：16 进制 0x0a）</li>
+<li><strong>报文主体</strong>：应被发送的数据</li>
+</ul>
+<p><a name="KPv76"></a></p>
+<h3 id="请求报文"><a href="#请求报文" class="headerlink" title="请求报文"></a>请求报文</h3><table>
+<thead>
+<tr>
+<th>GET / HTTP/1.1</th>
+<th>请求行</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Host: hackr.jp<br>User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:13.0) Gecko/20100101 Firefox/13.0.1<br>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,<em>/</em>;q=0.8<br>Accept-Language: ja,en-us;q=0.7,en;q=0.3<br>Acceptt-Encoding: gzip, deflate<br>DNT: 1<br>Connection: keep-alive<br>Pragma: no-cache<br>Cache-Control: no-cache</td>
+<td>各种头部字段</td>
+</tr>
+<tr>
+<td>空行（CR + LF）</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>请求行：请求的方法 + 请求 URI + HTTP 版本 （空格分隔）</li>
+<li>首部字段：包含表示请求和响应的各种条件和属性的各类首部。<ul>
+<li>一般有 4 种首部，分别是：通用首部、请求首部、响应首部和实体首部。</li>
+</ul>
+</li>
+</ul>
+<p><a name="7tb1S"></a></p>
+<h3 id="响应报文"><a href="#响应报文" class="headerlink" title="响应报文"></a>响应报文</h3><table>
+<thead>
+<tr>
+<th>HTTP/1.1 200 OK</th>
+<th>状态行</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Date: Fri, 13 Jul 2012 02:45:25 GMT<br>Server: Apache<br>Last-Modified: Fri, 31 Aug 2007 02:02:20 GMT<br>ETag: “45bael-16a-46d776ac”<br>Accept-Ranges: bytes<br>Content-Length: 362<br>Connection: close<br>Content-Type: text/html</td>
+<td>各种头部字段</td>
+</tr>
+<tr>
+<td>空行（CR + LF）</td>
+<td></td>
+</tr>
+<tr>
+<td>HTML 内容（PS: MD 没法合理展示）</td>
+<td>报文主体</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>状态行：HTTP版本 + 状态名 + 响应结果（空格分隔）</li>
+<li>首部字段：包含表示请求和响应的各种条件和属性的各类首部。<ul>
+<li>一般有 4 种首部，分别是：通用首部、请求首部、响应首部和实体首部。</li>
+</ul>
+</li>
+</ul>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li><a href="https://book.douban.com/subject/25863515/" target="_blank" rel="noopener">《图解HTTP》</a></li>
+</ul>
 
       
     </div>
@@ -185,7 +247,7 @@
 	<div id="comment">
 	
 	<!-- 多说评论框 start -->
-	 <div class="ds-thread" data-thread-key="/2019/05/03/HTTP学习笔记（一）-经典网络五层模型/" data-title="HTTP 学习笔记(一): TCP/IP 五层模型" data-url="https://yingpengsha.github.io/2019/05/03/HTTP学习笔记（一）-经典网络五层模型/"></div>
+	 <div class="ds-thread" data-thread-key="/2019/05/05/HTTP学习笔记（五）-HTTP报文/" data-title="HTTP 学习笔记(五): HTTP 报文" data-url="https://yingpengsha.github.io/2019/05/05/HTTP学习笔记（五）-HTTP报文/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -237,19 +299,10 @@
     
 <nav id="article-nav">
   
-    <a href="../../04/HTTP学习笔记（二）-HTTP协议的发展历史/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          HTTP 学习笔记(二): HTTP协议的发展历史
-        
-      </div>
-    </a>
   
-  
-    <a href="../../../03/27/JS里的数据结构-栈/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="../../04/HTTP学习笔记（四）-URI、URL、URN/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">JS 里的数据结构 - 栈</div>
+      <div class="article-nav-title">HTTP 学习笔记(四): URI、URL、URN</div>
     </a>
   
 </nav>
@@ -263,7 +316,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-IP-五层模型"><span class="nav-number">1.</span> <span class="nav-text">TCP/IP 五层模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用层"><span class="nav-number">2.</span> <span class="nav-text">应用层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#应用层-1"><span class="nav-number">2.1.</span> <span class="nav-text">应用层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表示层"><span class="nav-number">2.2.</span> <span class="nav-text">表示层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话层"><span class="nav-number">2.3.</span> <span class="nav-text">会话层</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传输层"><span class="nav-number">3.</span> <span class="nav-text">传输层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络层"><span class="nav-number">4.</span> <span class="nav-text">网络层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据链路层"><span class="nav-number">5.</span> <span class="nav-text">数据链路层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#物理层"><span class="nav-number">6.</span> <span class="nav-text">物理层</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-报文"><span class="nav-number">1.</span> <span class="nav-text">HTTP 报文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求报文"><span class="nav-number">2.</span> <span class="nav-text">请求报文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应报文"><span class="nav-number">3.</span> <span class="nav-text">响应报文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考链接"><span class="nav-number">4.</span> <span class="nav-text">参考链接</span></a></li></ol>
     
     </div>
   </aside>
