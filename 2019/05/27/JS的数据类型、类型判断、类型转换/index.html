@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JS的数据类型、类型判断、类型转换 | YINGPENGSHA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="JavaScript, ECMAScript, 数据类型" />
+  
+  
+  
+  
+  <meta name="description" content="数据类型、类型判断、类型转换">
+<meta name="keywords" content="JavaScript, ECMAScript, 数据类型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS的数据类型、类型判断、类型转换">
+<meta property="og:url" content="https://yingpengsha.github.io/2019/05/27/JS的数据类型、类型判断、类型转换/index.html">
+<meta property="og:site_name" content="YINGPENGSHA">
+<meta property="og:description" content="数据类型、类型判断、类型转换">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/268093/1558961114167-d1b13408-3c67-4351-b84a-9d3cbc8ebc6c.png">
+<meta property="og:updated_time" content="2019-05-27T12:45:27.029Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS的数据类型、类型判断、类型转换">
+<meta name="twitter:description" content="数据类型、类型判断、类型转换">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2019/png/268093/1558961114167-d1b13408-3c67-4351-b84a-9d3cbc8ebc6c.png">
+  
+    <link rel="alternate" href="/atom.xml" title="YINGPENGSHA" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="../../../../css/style.css">
+
+  <script src="../../../../js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="YINGPENGSHA" rel="home"> YINGPENGSHA </a>
+            
+          </h1>
+          
+          
+            <div class="site-description">Pease &amp; Love</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../index.html">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../categories">Categories</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="../../../../about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-JS的数据类型、类型判断、类型转换" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img fancybox" href="https://cdn.nlark.com/yuque/0/2019/png/268093/1558961114167-d1b13408-3c67-4351-b84a-9d3cbc8ebc6c.png" rel="gallery_cjw6d8mf9000lzoy43n17zrsh">
+        <img src="https://cdn.nlark.com/yuque/0/2019/png/268093/1558961114167-d1b13408-3c67-4351-b84a-9d3cbc8ebc6c.png" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      JS的数据类型、类型判断、类型转换
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="" class="article-date">
+	  <time datetime="2019-05-27T12:34:39.000Z" itemprop="datePublished">May 27, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../../../categories/学习笔记/">学习笔记</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="数据类型、类型判断、类型转换"><a href="#数据类型、类型判断、类型转换" class="headerlink" title="数据类型、类型判断、类型转换"></a>数据类型、类型判断、类型转换</h1><a id="more"></a>
+<blockquote>
+<p>JS 的数据类型对我来说一直是一个坑，知识点如果只是背，迟早有一天会忘。所以打算写一篇博客，刨根问底，把它嚼烂了，相信便不会轻易忘记了。<br>PS：写完最后一块，我后脑勺一涨一涨的。</p>
+</blockquote>
+<p><a name="6LBbO"></a></p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p><a name="LeTKO"></a></p>
+<h3 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h3><p>基本类型（基本数值、基本数据类型）是一种既非对象也无方法的数据。</p>
+<p>共有6种基本类型：  <code>number</code> ，<code>string</code> ， <code>boolean</code> ， <code>null</code> ， <code>undefined</code> ， <code>symbol</code>  (ECMAScript 2015新增)。</p>
+<blockquote>
+<p>所有基本类型的值都是<strong>不可改变</strong>的。但需要注意的是，基本类型本身和一个赋值为基本类型的变量的区别。变量会被赋予一个新值，而原值不能像数组、对象以及函数那样被改变。</p>
+</blockquote>
+<p><a name="UuZoi"></a></p>
+<h4 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h4><p>根据 ECMAScript 标准，JavaScript 中只有一种数字类型：基于 IEEE 754 标准的双精度 64 位二进制格式的值（-(263 -1) 到 263 -1）。<strong>它并没有为整数给出一种特定的类型</strong>。除了能够表示浮点数外，还有一些带符号的值：</p>
+<ul>
+<li><code>+Infinity</code> </li>
+<li><code>-Infinity</code> </li>
+<li><code>NaN</code> </li>
+</ul>
+<p><a name="ODZfS"></a></p>
+<h4 id="String"><a href="#String" class="headerlink" title="String"></a>String</h4><p>JavaScript的字符串类型用于表示文本数据。它是一组16位的无符号整数值的“元素”。在字符串中的每个元素占据了字符串的位置。第一个元素的索引为0，下一个是索引1，依此类推。字符串的长度是它的元素的数量。</p>
+<p><a name="nBnkG"></a></p>
+<h4 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h4><p>布尔表示一个逻辑实体，可以有两个值：<code>true</code> 和 <code>false</code>。</p>
+<p><a name="uQFgN"></a></p>
+<h4 id="Null"><a href="#Null" class="headerlink" title="Null"></a>Null</h4><p>Null 类型只有一个值： null，<strong>null表示”没有对象”，即该处不应该有值</strong>。</p>
+<p><a name="l70tu"></a></p>
+<h4 id="Undefined"><a href="#Undefined" class="headerlink" title="Undefined"></a>Undefined</h4><p>一个没有被赋值的变量会有个默认值 undefined，<strong>undefined表示”缺少值”，就是此处应该有一个值，但是还没有定义。</strong></p>
+<p><a name="rCM17"></a></p>
+<h4 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h4><p>符号(Symbols)是ECMAScript 第6版新定义的。符号类型是唯一的并且是不可修改的, 并且也可以用来作为Object的key的值. 在某些语言当中也有类似的原子类型(Atoms). 你也可以认为为它们是C里面的枚举类型.</p>
+<p><a name="iRUkA"></a></p>
+<h3 id="引用类型（对象）"><a href="#引用类型（对象）" class="headerlink" title="引用类型（对象）"></a>引用类型（对象）</h3><p>引用类型内存放的并非具体的值，而是所对应对象的内存地址。</p>
+<p>常用的有引用类型有：<code>Object</code>、<code>Array</code>、<code>Date</code>、<code>RegExp</code>、<code>Function</code> <strong>等</strong></p>
+<p><a name="yE2m8"></a></p>
+<h4 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h4><p>一个 Javascript 对象就是键和值之间的映射。键是一个字符串（或者 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Symbol" target="_blank" rel="noopener"><code>Symbol</code></a>） ，值可以是任意类型的值。</p>
+<p><a name="otkSm"></a></p>
+<h4 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h4><p><a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array" target="_blank" rel="noopener">数组</a>是一种使用整数作为键( integer-key-ed )属性和长度( length )属性之间关联的常规对象。此外，数组对象还继承了 Array.prototype 的一些操作数组的便捷方法。</p>
+<p><a name="MTCgU"></a></p>
+<h4 id="Date"><a href="#Date" class="headerlink" title="Date"></a>Date</h4><p>用于存放日期时间的内建对象。</p>
+<p><a name="pBtqv"></a></p>
+<h4 id="RegExp"><a href="#RegExp" class="headerlink" title="RegExp"></a>RegExp</h4><p>用于正则表达式的对象。</p>
+<p><a name="VrRs9"></a></p>
+<h4 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h4><p>函数是一个附带可被调用功能的常规对象。</p>
+<p><a name="wcaRq"></a></p>
+<h2 id="类型判断"><a href="#类型判断" class="headerlink" title="类型判断"></a>类型判断</h2><p><a name="EcKmt"></a></p>
+<h3 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h3><p><strong><code>typeof</code></strong>操作符返回一个字符串，表示未经计算的操作数的类型。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Number</td>
+<td>“number”</td>
+</tr>
+<tr>
+<td>String</td>
+<td>“string”</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>“boolean”</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>“object”</td>
+</tr>
+<tr>
+<td>Undefined</td>
+<td>“undefined”</td>
+</tr>
+<tr>
+<td>Symbol</td>
+<td>“symbol”</td>
+</tr>
+<tr>
+<td>Function</td>
+<td>“function”</td>
+</tr>
+<tr>
+<td>其他引用类型</td>
+<td>“object”</td>
+</tr>
+</tbody>
+</table>
+<p><a name="9KGLx"></a></p>
+<h4 id="Null-返回-“object”"><a href="#Null-返回-“object”" class="headerlink" title="Null 返回 “object”"></a>Null 返回 “object”</h4><p>在 JavaScript 最初的实现中，JavaScript 中的值是由一个表示类型的标签和实际数据值表示的。对象的类型标签是 0。由于 null 代表的是空指针（大多数平台下值为 0x00），因此，null的类型标签也成为了 0，typeof null就错误的返回了”object”。</p>
+<p><a name="4rjRL"></a></p>
+<h4 id="New-操作符"><a href="#New-操作符" class="headerlink" title="New 操作符"></a>New 操作符</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">true</span>) === <span class="string">'object'</span>;</span><br><span class="line"><span class="keyword">typeof</span> <span class="keyword">new</span> <span class="built_in">Number</span>(<span class="number">1</span>) === <span class="string">'object'</span>;</span><br><span class="line"><span class="keyword">typeof</span> <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">"abc"</span>) === <span class="string">'object'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="keyword">new</span> <span class="built_in">Function</span>() === <span class="string">'function'</span>;</span><br></pre></td></tr></table></figure>
+<p><a name="Ub8yu"></a></p>
+<h3 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h3><p>instanceof运算符用于测试构造函数的prototype属性是否出现在对象的原型链中的任何位置，<strong>适合用于判断自定义的类实例对象, 而不是用来判断原生的数据类型</strong>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Car</span>(<span class="params">make, model, year</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.make = make;</span><br><span class="line">  <span class="keyword">this</span>.model = model;</span><br><span class="line">  <span class="keyword">this</span>.year = year;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> auto = <span class="keyword">new</span> Car(<span class="string">'Honda'</span>, <span class="string">'Accord'</span>, <span class="number">1998</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(auto <span class="keyword">instanceof</span> Car);</span><br><span class="line"><span class="comment">// expected output: true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(auto <span class="keyword">instanceof</span> <span class="built_in">Object</span>);</span><br><span class="line"><span class="comment">// expected output: true</span></span><br></pre></td></tr></table></figure>
+<p><a name="yE9J6"></a></p>
+<h3 id="Object-prototype-toString"><a href="#Object-prototype-toString" class="headerlink" title="Object.prototype.toString"></a>Object.prototype.toString</h3><p>Object.prototype.toString 之所以能实现类型识别，是因为它可以直接获取 this 的 <code>[[class]]</code> 。</p>
+<p><a href="http://lzw.me/pages/ecmascript/#304" target="_blank" rel="noopener">ES5</a> 里如此介绍它的运行过程：</p>
+<blockquote>
+<ol>
+<li>如果 this 的值是 undefined, 返回 “[object Undefined]”.</li>
+<li>如果 this 的值是 null, 返回 “[object Null]”.</li>
+<li>令 O 为以 this 作为参数调用 ToObject 的结果 .</li>
+<li>令 class 为 O 的 [[Class]] 内部属性的值 .</li>
+<li>返回三个字符串 “[object “, class, and “]” 连起来的字符串 .</li>
+</ol>
+</blockquote>
+<p>因此我们只需要使用 call / apply 将需要判断的变量绑定到 toString 上的 this 即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="literal">null</span>) <span class="comment">// [object Null]</span></span><br><span class="line"><span class="comment">// 其他类型的变量亦是如此</span></span><br></pre></td></tr></table></figure>
+<p><a name="8QrbI"></a></p>
+<h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><p><a name="z8ack"></a></p>
+<h3 id="常用类型互相转换参考"><a href="#常用类型互相转换参考" class="headerlink" title="常用类型互相转换参考"></a>常用类型互相转换参考</h3><p><a name="79q7E"></a></p>
+<h4 id="基本类型-gt-布尔类型"><a href="#基本类型-gt-布尔类型" class="headerlink" title="基本类型 -&gt; 布尔类型"></a>基本类型 -&gt; 布尔类型</h4><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>值</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Number</td>
+<td>0、-0、NaN</td>
+<td><strong>false</strong></td>
+</tr>
+<tr>
+<td></td>
+<td>其他</td>
+<td><strong>true</strong></td>
+</tr>
+<tr>
+<td>String</td>
+<td>“”</td>
+<td><strong>false</strong></td>
+</tr>
+<tr>
+<td></td>
+<td>其他</td>
+<td><strong>true</strong></td>
+</tr>
+<tr>
+<td>Null</td>
+<td>Null</td>
+<td><strong>false</strong></td>
+</tr>
+<tr>
+<td>Undefined</td>
+<td>Undefined</td>
+<td><strong>false</strong></td>
+</tr>
+<tr>
+<td>Symbol</td>
+<td>/</td>
+<td><strong>true</strong></td>
+</tr>
+</tbody>
+</table>
+<p><a name="9luHZ"></a></p>
+<h4 id="基本类型-gt-字符串类型"><a href="#基本类型-gt-字符串类型" class="headerlink" title="基本类型 -&gt; 字符串类型"></a>基本类型 -&gt; 字符串类型</h4><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>值</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Number</td>
+<td>/</td>
+<td><strong>值 + “”</strong></td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Null</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Undefined</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Symbol</td>
+<td>/</td>
+<td><strong>Uncaught TypeError</strong></td>
+</tr>
+</tbody>
+</table>
+<p><a name="O8psK"></a></p>
+<h4 id="基本类型-gt-数值类型"><a href="#基本类型-gt-数值类型" class="headerlink" title="基本类型 -&gt; 数值类型"></a>基本类型 -&gt; 数值类型</h4><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>值</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>String</td>
+<td>数值字符串 且 只有前后有空格</td>
+<td><strong>正常数值</strong></td>
+</tr>
+<tr>
+<td></td>
+<td>其他（包括：数值字符串，但中间数值中间有空格）</td>
+<td><strong>NaN</strong></td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>true</td>
+<td><strong>1</strong></td>
+</tr>
+<tr>
+<td></td>
+<td>false</td>
+<td><strong>0</strong></td>
+</tr>
+<tr>
+<td>Null</td>
+<td>Null</td>
+<td><strong>0</strong></td>
+</tr>
+<tr>
+<td>Undefined</td>
+<td>Undefined</td>
+<td><strong>NaN</strong></td>
+</tr>
+<tr>
+<td>Symbol</td>
+<td>/</td>
+<td><strong>Uncaught TypeError</strong></td>
+</tr>
+</tbody>
+</table>
+<p><a name="JJczm"></a></p>
+<h4 id="基本类型-gt-对象类型"><a href="#基本类型-gt-对象类型" class="headerlink" title="基本类型 -&gt; 对象类型"></a>基本类型 -&gt; 对象类型</h4><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>值</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Number</td>
+<td>/</td>
+<td><strong>对应构造函数生成的对象</strong></td>
+</tr>
+<tr>
+<td>String</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Symbol</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Null</td>
+<td></td>
+<td><strong>{}</strong></td>
+</tr>
+<tr>
+<td>Undefined</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a name="t5b3x"></a></p>
+<h4 id="对象类型-gt-基本类型"><a href="#对象类型-gt-基本类型" class="headerlink" title="对象类型 -&gt; 基本类型"></a>对象类型 -&gt; 基本类型</h4><table>
+<thead>
+<tr>
+<th>值</th>
+<th>类型</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/</td>
+<td>Number</td>
+<td><strong>NaN</strong></td>
+</tr>
+<tr>
+<td></td>
+<td>String</td>
+<td><strong>[object Object]</strong></td>
+</tr>
+<tr>
+<td></td>
+<td>Boolean</td>
+<td><strong>true</strong></td>
+</tr>
+<tr>
+<td></td>
+<td>Symbol</td>
+<td><strong>Symbol([object Object])</strong></td>
+</tr>
+</tbody>
+</table>
+<p><a name="h2v3m"></a></p>
+<h4 id="数组类型-gt-字符串类型"><a href="#数组类型-gt-字符串类型" class="headerlink" title="数组类型 -&gt; 字符串类型"></a>数组类型 -&gt; 字符串类型</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]) <span class="comment">// "1,2,3"</span></span><br></pre></td></tr></table></figure>
+<p><a name="3e5Cr"></a></p>
+<h3 id="的类型转换"><a href="#的类型转换" class="headerlink" title="== 的类型转换"></a>== 的类型转换</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">null</span> == <span class="literal">undefined</span> <span class="comment">// true     </span></span><br><span class="line"><span class="number">11</span> == <span class="string">"11"</span> <span class="comment">// true            先将字符串转换成数值型再进行比较</span></span><br><span class="line"><span class="literal">true</span> == <span class="number">1</span> <span class="comment">// true             == 两边的 true 会变为 1, false 会变为 0</span></span><br><span class="line">[] == <span class="number">0</span> <span class="comment">// true               暂时没搞懂凸(艹皿艹 ) 转成布尔型了？</span></span><br></pre></td></tr></table></figure>
+<p><a name="kwRPP"></a></p>
+<h3 id="的类型转换-1"><a href="#的类型转换-1" class="headerlink" title="+ 的类型转换"></a>+ 的类型转换</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">91</span> + <span class="string">"1"</span> <span class="comment">// "911"             两边有值，且只要有一个非数值型，则视为字符串连接符。</span></span><br><span class="line"><span class="number">90</span> + <span class="number">1</span> + <span class="string">"1"</span><span class="comment">// "911"          等于 (90 + 1) + "1"</span></span><br><span class="line">+ <span class="string">"1"</span> <span class="comment">// 1                    只有一边有值时，视为数值运算符</span></span><br></pre></td></tr></table></figure>
+<p><a name="3DJHG"></a></p>
+<h3 id="其他数学运算符-的类型转换"><a href="#其他数学运算符-的类型转换" class="headerlink" title="其他数学运算符 的类型转换"></a>其他数学运算符 的类型转换</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 没有任何余地，全**给我转成数值进行运算</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">'04-02-2018'</span>) - <span class="string">'1'</span> <span class="comment">// 1522619999999</span></span><br><span class="line"><span class="string">'12'</span> / <span class="string">'6'</span> <span class="comment">// 2</span></span><br><span class="line">-<span class="string">'1'</span> <span class="comment">// -1</span></span><br></pre></td></tr></table></figure>
+<p><a name="Qwjw9"></a></p>
+<h3 id="的类型转换-2"><a href="#的类型转换-2" class="headerlink" title="! 的类型转换"></a>! 的类型转换</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 值转成布尔型进行运算</span></span><br><span class="line"></span><br><span class="line">!<span class="number">1</span> <span class="comment">// false</span></span><br><span class="line">!!(&#123;&#125;) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p><a name="4qrGF"></a></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Data_structures" target="_blank" rel="noopener">JavaScript 数据类型和数据结构</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2014/03/undefined-vs-null.html" target="_blank" rel="noopener">undefined与null的区别</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/typeof" target="_blank" rel="noopener">typeof</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/instanceof" target="_blank" rel="noopener">instanceof</a></li>
+<li><a href="http://lzw.me/pages/ecmascript/#304" target="_blank" rel="noopener">ES5 - Object.prototype.toString()</a></li>
+<li><a href="https://juejin.im/post/5b6906b46fb9a04fcb5b8771#heading-0" target="_blank" rel="noopener">JavaScript核心概念(1):类型转换</a></li>
+<li><a href="https://juejin.im/post/5ad5af7251882555894a5054#heading-13" target="_blank" rel="noopener">[译] [1] + [2] - [3] === 9!? 类型转换深入研究</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="../../../../categories/学习笔记/">学习笔记</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/ECMAScript/">ECMAScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/JavaScript/">JavaScript</a></li></ul>
+
+      
+        
+	<div id="comment">
+	
+	<!-- 多说评论框 start -->
+	 <div class="ds-thread" data-thread-key="/2019/05/27/JS的数据类型、类型判断、类型转换/" data-title="JS的数据类型、类型判断、类型转换" data-url="https://yingpengsha.github.io/2019/05/27/JS的数据类型、类型判断、类型转换/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"iTimeTraveler"};
+	  (function() {
+	    var ds = document.createElement('script');
+	    ds.type = 'text/javascript';ds.async = true;
+	    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	    ds.charset = 'UTF-8';
+	    (document.getElementsByTagName('head')[0] 
+	     || document.getElementsByTagName('body')[0]).appendChild(ds);
+	  })();
+	  </script>
+	<!-- 多说公共JS代码 end -->
+	
+	</div>
+	<link rel="stylesheet" href="../../../../css/comment.css">
+
+
+      
+
+      
+        
+        <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zOTQxMC8xNTkzNw==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+        
+      
+
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../../06/HTTP学习笔记（六）-HTTP状态码/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">HTTP 学习笔记(六): HTTP 状态码</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据类型、类型判断、类型转换"><span class="nav-number">1.</span> <span class="nav-text">数据类型、类型判断、类型转换</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">1.1.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本类型"><span class="nav-number">1.1.1.</span> <span class="nav-text">基本类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Number"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">Number</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#String"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">String</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Boolean"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">Boolean</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Null"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">Null</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Undefined"><span class="nav-number">1.1.1.5.</span> <span class="nav-text">Undefined</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Symbol"><span class="nav-number">1.1.1.6.</span> <span class="nav-text">Symbol</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用类型（对象）"><span class="nav-number">1.1.2.</span> <span class="nav-text">引用类型（对象）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Object"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">Object</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Array"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">Array</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Date"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">Date</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RegExp"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">RegExp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Function"><span class="nav-number">1.1.2.5.</span> <span class="nav-text">Function</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型判断"><span class="nav-number">1.2.</span> <span class="nav-text">类型判断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#typeof"><span class="nav-number">1.2.1.</span> <span class="nav-text">typeof</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Null-返回-“object”"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">Null 返回 “object”</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#New-操作符"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">New 操作符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#instanceof"><span class="nav-number">1.2.2.</span> <span class="nav-text">instanceof</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-prototype-toString"><span class="nav-number">1.2.3.</span> <span class="nav-text">Object.prototype.toString</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型转换"><span class="nav-number">1.3.</span> <span class="nav-text">类型转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用类型互相转换参考"><span class="nav-number">1.3.1.</span> <span class="nav-text">常用类型互相转换参考</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本类型-gt-布尔类型"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">基本类型 -&gt; 布尔类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本类型-gt-字符串类型"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">基本类型 -&gt; 字符串类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本类型-gt-数值类型"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">基本类型 -&gt; 数值类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本类型-gt-对象类型"><span class="nav-number">1.3.1.4.</span> <span class="nav-text">基本类型 -&gt; 对象类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象类型-gt-基本类型"><span class="nav-number">1.3.1.5.</span> <span class="nav-text">对象类型 -&gt; 基本类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组类型-gt-字符串类型"><span class="nav-number">1.3.1.6.</span> <span class="nav-text">数组类型 -&gt; 字符串类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#的类型转换"><span class="nav-number">1.3.2.</span> <span class="nav-text">== 的类型转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#的类型转换-1"><span class="nav-number">1.3.3.</span> <span class="nav-text">+ 的类型转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他数学运算符-的类型转换"><span class="nav-number">1.3.4.</span> <span class="nav-text">其他数学运算符 的类型转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#的类型转换-2"><span class="nav-number">1.3.5.</span> <span class="nav-text">! 的类型转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">1.4.</span> <span class="nav-text">参考链接</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="../../../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../../../archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="../../../../categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="../../../../tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="../../../../about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 YINGPENGSHA All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人次</span>
+            <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+            
+          
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="../../../../fancybox/jquery.fancybox.css">
+  <script src="../../../../fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="../../../../js/script.js"></script>
+<script src="../../../../js/bootstrap.js"></script>
+<script src="../../../../js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
