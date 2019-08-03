@@ -38,7 +38,7 @@
 <meta property="og:description" content="Redux 源码阅读笔记">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/268093/1564797837917-63895a5c-fde8-4c0a-8748-65d4dce77e0b.png?x-oss-process=image/resize,w_746">
-<meta property="og:updated_time" content="2019-08-03T02:04:27.641Z">
+<meta property="og:updated_time" content="2019-08-03T02:05:33.490Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redux 源码阅读笔记">
 <meta name="twitter:description" content="Redux 源码阅读笔记">
@@ -133,7 +133,7 @@
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="https://cdn.nlark.com/yuque/0/2019/png/268093/1564797837917-63895a5c-fde8-4c0a-8748-65d4dce77e0b.png?x-oss-process=image/resize,w_746" rel="gallery_cjyuw9g590019jgy4f2mw2rl5">
+      <a class="article-gallery-img fancybox" href="https://cdn.nlark.com/yuque/0/2019/png/268093/1564797837917-63895a5c-fde8-4c0a-8748-65d4dce77e0b.png?x-oss-process=image/resize,w_746" rel="gallery_cjyuwawvn001f8cy46sozxzzt">
         <img src="https://cdn.nlark.com/yuque/0/2019/png/268093/1564797837917-63895a5c-fde8-4c0a-8748-65d4dce77e0b.png?x-oss-process=image/resize,w_746" itemprop="image">
       </a>
     
@@ -170,7 +170,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="Redux-源码阅读笔记"><a href="#Redux-源码阅读笔记" class="headerlink" title="Redux 源码阅读笔记"></a>Redux 源码阅读笔记</h1><a id="more"></a>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>看完 Redux 的源码，可谓是收获颇丰，先不论对 Redux 本身。光是其中“中间件模式”的实现就够反复🤔琢磨了，其中 isPlainObject 🔧工具函数为了吃透它来了一场考古。除此之外，如果往基础走，Redux 简直就是闭包的大型实现现场，尤其 是 applyMiddleware 中的闭包简直拍案叫绝。</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>看完 Redux 的源码，可谓是收获颇丰，先不论对 Redux 本身。光是其中“中间件模式”的实现就够反复🤔琢磨了，其中 isPlainObject 🔧工具函数为了吃透它来了一场考古。除此之外，如果往基础走，Redux 简直就是闭包的大型实现现场，尤其是 applyMiddleware 中的闭包简直拍案叫绝。</p>
 <p>大部分笔记以注释的形式写在了源码文件里，虽然有点碎碎念，但是想来会有所帮助。</p>
 <p>📒 代码笔记地址: <a href="https://github.com/yingpengsha/redux" target="_blank" rel="noopener">https://github.com/yingpengsha/redux</a></p>
 <h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">src</span><br><span class="line">├─ applyMiddleware.js       // 组合多个 middleware 生成一个 enhancer</span><br><span class="line">├─ bindActionCreators.js    // 一个提供给使用者的工具函数，绑定 dispatch 和 actionCreator</span><br><span class="line">├─ combineReducers.js       // 组合多个 reducer 生成一个 reducer</span><br><span class="line">├─ compose.js               // 组合多个 enhancer 生成一个 enhancer (一个将一堆函数首尾相连的🔧工具函数)</span><br><span class="line">├─ createStore.js           // 接收 reducer[, preloadedState][, enhancer] 生成一个 store</span><br><span class="line">├─ index.js                 // 暴露接口</span><br><span class="line">└─ utils</span><br><span class="line">       ├─ actionTypes.js    // 生成 redux 库自身所需的 actionType</span><br><span class="line">       ├─ isPlainObject.js  // 判断一个变量是否是普通对象</span><br><span class="line">       └─ warning.js        // 用于抛出错误的工具函数</span><br></pre></td></tr></table></figure>
